@@ -5,16 +5,55 @@
 "threads"
 
 
+import io
 import queue
 import threading
 import time
+import traceback
 import types as rtypes
 
 
-from .errors import later
-
-
 rpr = object.__repr__
+
+
+"errors"
+
+
+class Errors:
+
+    "Errors"
+
+    errors = []
+
+    @staticmethod
+    def format(exc):
+        "format an exception"
+        res = ""
+        stream = io.StringIO(
+                             traceback.print_exception(
+                                                       type(exc),
+                                                       exc,
+                                                       exc.__traceback__
+                                                      )
+                           )
+        for line in stream.readlines():
+            res += line + "\n"
+        return res
+
+
+def errors(outer):
+    "display errors."
+    for exc in Errors.errors:
+        outer(Errors.format(exc))
+
+
+def later(exc):
+    "add an exception"
+    excp = exc.with_traceback(exc.__traceback__)
+    Errors.errors.append(excp)
+
+
+"threads"
 
 
 class Thread(threading.Thread):
@@ -54,8 +93,6 @@ class Thread(threading.Thread):
             self._result = func(*args)
         except Exception as ex:
             later(ex)
-            if len(args) and "ready" in dir(args[0]):
-                args[0].ready()
 
 
 def named(obj):
@@ -84,8 +121,14 @@ def launch(func, *args, **kwargs):
     return thread
 
 
+"interface"
+
+
 def __dir__():
     return (
+        'Errors',
         'Thread',
+        'errors',
+        'later',
         'launch'
     )
