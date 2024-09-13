@@ -81,13 +81,17 @@ def launch(func, *args, **kwargs):
     return thread
 
 
-from .errors import Errors, errors, later
+from .errors   import Errors, errors, later
+from .repeater import Repeater
+from .timer    import Timer
 
 
 def __dir__():
     return (
         'Errors',
+        'Repeater',
         'Thread',
+        'Timer',
         'errors',
         'later',
         'launch'
