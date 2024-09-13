@@ -5,16 +5,15 @@ NAME
 
 ::
 
-    OBJT - objects threads
+    OBJT - objects broker
 
 
 SYNOPSIS
 
 ::
 
-    >>> from objt import launch
-    >>> launch(print, "yoo!")
-    yoo!
+    >>> from objt import Broker
+    >>> Broker.register(obj)
 
 
 INSTALL
@@ -28,11 +27,11 @@ DESCRIPTION
 
 ::
 
-    OBJT is a package that provides thread services.
+    OBJT is a package that provides a object broker.
 
 
 COPYRIGHT
 
 ::
 
-    OBJR is Public Domain.
+    OBJT is Public Domain.

@@ -8,7 +8,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "objt"
-description = "objects threads"
+description = "objects broker"
 version = "6"
 authors = [
     {name = "Bart Thate", email = "rssbotd@gmail.com"},
@@ -35,12 +35,6 @@ packages = [
     'objt',
 ]
 zip-safe=true
-
-
-[tool.setuptools.data-files]
-"share/doc/objt" = [
-    "README.rst"
-]
 
 
 [tool.setuptools.exclude-package-data]
